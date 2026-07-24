@@ -14,12 +14,21 @@ function addWeddingToCalendar() {
     'DTSTART:20250914T043000Z',
     'DTEND:20250914T190000Z',
     "SUMMARY:Agin & Aarati's Wedding",
-    'LOCATION:Umaid Bhawan Palace\\, Jodhpur\\, Rajasthan',
+    'LOCATION:KRISHNA INN\\, GURUVAYOOR (Star Hotel)\\, East Nada\\, Guruvayur\\, Kerala 680101',
     "DESCRIPTION:Join us as we celebrate Agin & Aarati's wedding!",
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
 
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+
+  if (isIOS) {
+    // iOS Safari opens the Calendar preview directly for a data: URI instead of downloading it.
+    window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    return;
+  }
+
+  // Android/desktop: browsers hand .ics blobs to the Calendar app via the download/open-with sheet.
   const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
