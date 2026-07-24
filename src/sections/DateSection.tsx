@@ -20,16 +20,27 @@ function addWeddingToCalendar() {
     'END:VCALENDAR',
   ].join('\r\n');
 
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
   const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
   if (isIOS) {
-    // iOS Safari opens the Calendar preview directly for a data: URI instead of downloading it.
-    window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    // iOS Safari blocks JS-driven navigation to data: URIs unless it's a base64
+    // data URI applied directly to an <a> tag's click — this is the pattern real
+    // "add to calendar" libraries use to open the native Calendar preview.
+    const reader = new FileReader();
+    reader.onload = () => {
+      const link = document.createElement('a');
+      link.href = reader.result as string;
+      link.setAttribute('download', 'Agin-Aarati-Wedding.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+    reader.readAsDataURL(blob);
     return;
   }
 
   // Android/desktop: browsers hand .ics blobs to the Calendar app via the download/open-with sheet.
-  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
