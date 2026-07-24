@@ -38,6 +38,7 @@ export default function RSVPSection() {
       />
 
       {/* Decorative flower, connected to the bottom-left border */}
+      {/* Test */}
       <motion.img
         src="/flower1.png"
         alt=""
