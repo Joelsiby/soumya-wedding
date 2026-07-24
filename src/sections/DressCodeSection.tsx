@@ -32,7 +32,7 @@ export default function DressCodeSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full py-16 sm:py-24 bg-[#faf7f2]">
+    <section ref={sectionRef} className="relative w-full pt-16 pb-10 sm:pt-24 sm:pb-14 bg-[#faf7f2]">
       <div className="relative z-10 flex flex-col items-center px-6">
         {/* Title */}
         <motion.p

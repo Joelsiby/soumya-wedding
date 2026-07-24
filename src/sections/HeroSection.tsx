@@ -157,7 +157,7 @@ export default function HeroSection() {
       </div>
 
       {/* Hero text content */}
-      <div className="relative z-20 flex flex-col items-center justify-start h-[100vh] px-6 pt-[15vh] pb-0">
+      <div className="relative z-20 flex flex-col items-center justify-center h-[100vh] px-6 pb-[15vh]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

@@ -26,15 +26,26 @@ export default function RSVPSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full py-16 sm:py-24 bg-[#faf7f2] overflow-hidden">
+    <section ref={sectionRef} className="relative w-full pt-10 pb-16 sm:pt-14 sm:pb-24 bg-[#faf7f2]">
       {/* Decorative flower, connected to the top-right border */}
       <motion.img
         src="/flower1.png"
         alt=""
-        className="absolute top-0 right-0 w-28 sm:w-40 -translate-y-1/2 pointer-events-none select-none"
+        className="absolute right-0 h-40 sm:h-60 w-auto object-contain pointer-events-none select-none -top-[5rem] sm:-top-[7.5rem] z-0"
         initial={{ opacity: 0, y: -10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
+      />
+
+      {/* Decorative flower, connected to the bottom-left border */}
+      <motion.img
+        src="/flower1.png"
+        alt=""
+        className="absolute bottom-0 h-40 sm:h-60 w-auto object-contain pointer-events-none select-none -translate-y-[10rem] sm:-translate-y-[13rem] -scale-x-100 z-0"
+        style={{ left: '-1rem' }}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8, delay: 0.2 }}
       />
 
       <div className="relative z-10 flex flex-col items-center px-6">

@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from './HeroSection';
 import DateSection from './DateSection';
 import LetterSection from './LetterSection';
-import ScheduleSection from './ScheduleSection';
 import VenueSection from './VenueSection';
 import DressCodeSection from './DressCodeSection';
 import RSVPSection from './RSVPSection';
