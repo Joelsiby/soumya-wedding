@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause } from 'lucide-react';
+import { registerMusicAudio } from '@/lib/musicController';
 
 export default function MusicButton() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -10,26 +11,18 @@ export default function MusicButton() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    // Keep the icon accurate no matter what triggers playback (autoplay, toggle, etc.)
+    // Let the logo-stamp click (in EnvelopeOpening) trigger this exact audio element.
+    registerMusicAudio(audio);
+
+    // Keep the icon accurate no matter what triggers playback (logo tap, toggle, etc.)
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
     audio.addEventListener('play', onPlay);
     audio.addEventListener('pause', onPause);
 
-    // Attempt autoplay immediately; most mobile browsers block this without a user gesture.
-    audio.play().catch(() => {});
-
-    // Fall back to starting playback on the very first tap anywhere (e.g. opening the
-    // envelope) — that's a real user gesture, so browsers allow play() from inside it.
-    const tryPlayOnFirstInteraction = () => {
-      if (audio.paused) audio.play().catch(() => {});
-    };
-    document.addEventListener('pointerdown', tryPlayOnFirstInteraction, { once: true });
-
     return () => {
       audio.removeEventListener('play', onPlay);
       audio.removeEventListener('pause', onPause);
-      document.removeEventListener('pointerdown', tryPlayOnFirstInteraction);
     };
   }, []);
 

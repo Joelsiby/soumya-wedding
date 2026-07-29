@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { playBackgroundMusic } from '@/lib/musicController';
 
 interface EnvelopeOpeningProps {
   onOpenComplete: () => void;
@@ -45,7 +46,10 @@ export default function EnvelopeOpening({ onOpenComplete }: EnvelopeOpeningProps
           transformStyle: 'preserve-3d'
         }}
         onClick={() => {
-          if (!isOpen) setIsOpen(true);
+          if (!isOpen) {
+            setIsOpen(true);
+            playBackgroundMusic();
+          }
         }}
       >
 

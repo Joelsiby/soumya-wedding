@@ -144,7 +144,7 @@ export default function DressCodeSection() {
           transition={{ delay: 1, duration: 0.8 }}
         >
           <p className="font-serif text-sm text-[#8b7d6b]">
-            <span className="text-[#6b5b4e] font-medium">Ladies:</span> Elegant summer dresses in pastel tones. We recommend bringing a hat and sunglasses for comfort.
+            <span className="text-[#6b5b4e] font-medium">Ladies:</span> Elegant summer dresses in pastel tones.
           </p>
           <p className="font-serif text-sm text-[#8b7d6b]">
             <span className="text-[#6b5b4e] font-medium">Gentlemen:</span> Suits or shirts in classic shades. Grey, blue, brown, beige are great choices!
