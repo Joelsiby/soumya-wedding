@@ -17,16 +17,17 @@ export default function VenueSection() {
   const mapsUrl = getMapsUrl(VENUE_ADDRESS);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-[80vh] sm:h-[90vh] overflow-hidden">
-      {/* Background image */}
+    <section ref={sectionRef} className="relative w-full h-[80vh] sm:h-[90vh]" style={{ clipPath: 'inset(-30% 0 0 0)' }}>
+      {/* Background image, scaled up so the top leaf overlaps the section above; left/right/bottom stay flush */}
       <img
         src="/venue.png"
         alt="Wedding venue"
         className="absolute inset-0 w-full h-full object-cover"
+        style={{ transform: 'scale(1.18) translateX(5%) translateY(-4%)' }}
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-start h-full pt-24 sm:pt-32 px-6 translate-x-12 sm:translate-x-16">
+      <div className="relative z-10 flex flex-col items-center justify-start h-full pt-24 sm:pt-32 px-6 translate-x-8 sm:translate-x-12">
         {/* Title */}
         <motion.p
           className="font-script text-4xl sm:text-6xl text-[#D4AF37] drop-shadow-lg mb-4"

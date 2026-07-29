@@ -16,8 +16,8 @@ export default function FooterSection() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
           <img
-            src="/footer_img.png"
-            className="w-full h-[60vh] sm:h-[80vh] object-cover object-top"
+            src="/footer.png"
+            className="w-full h-auto object-contain object-top"
           />
           
           {/* Bottom text overlay */}

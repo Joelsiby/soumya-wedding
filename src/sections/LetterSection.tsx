@@ -105,15 +105,19 @@ export default function LetterSection() {
 
 
             <h2 className="font-script text-2xl sm:text-4xl text-[#6b5b4e] mb-12 text-center leading-tight">
-              Dear friends and family,
+              To Our Dearest Family & Friends,
             </h2>
 
-            <p className="font-serif text-[#7a6a5d] text-center leading-relaxed text-lg sm:text-2xl mb-8 italic opacity-90">
-              As we get ready to say "I do," we feel grateful for the wonderful people in our lives.
+            <p className="font-serif text-[#7a6a5d] text-center leading-relaxed text-sm sm:text-lg mb-8 italic opacity-90">
+              Life has given us so many beautiful moments, but the greatest has been finding each other—and having incredible people like you to share the journey with.
             </p>
 
-            <p className="font-serif text-[#7a6a5d] text-center leading-relaxed text-lg sm:text-2xl opacity-90">
-              Your support means the world to us, and we would be honored to have you with us as we begin our life together.
+            <p className="font-serif text-[#7a6a5d] text-center leading-relaxed text-sm sm:text-lg mb-8 opacity-90">
+              As we promise forever to one another, our hearts will be fullest knowing you're there to witness the beginning of this new chapter.
+            </p>
+
+            <p className="font-serif text-[#7a6a5d] text-center leading-relaxed text-sm sm:text-lg opacity-90">
+              Thank you for your endless love, encouragement, and for being part of our story. We truly can't imagine this day without you.
             </p>
 
             {/* Bottom decoration */}

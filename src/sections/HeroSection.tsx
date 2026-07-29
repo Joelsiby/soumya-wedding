@@ -9,13 +9,14 @@ interface BirdProps {
   scale?: number;
 }
 
-function Bird({ delay, duration, startY, reverse = false, scale: _scale }: BirdProps) {
+function Bird({ delay, duration, startY, reverse = false, scale = 1 }: BirdProps) {
   return (
     <motion.svg
       className="absolute"
       style={{ 
         top: `${startY}%`,
         left: reverse ? '100%' : '-10%',
+        transform: `scale(${scale})`,
       }}
       width="24"
       height="16"

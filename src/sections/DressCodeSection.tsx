@@ -8,8 +8,7 @@ const dressImages = [
   '/couple_img_3.jpeg',
   '/couple_img_4.jpeg',
   '/couple_img_5.jpeg',
-  '/couple_img_6.jpeg',
-  '/couple_img_7.jpeg',
+
 ];
 
 const colorSwatches = [
