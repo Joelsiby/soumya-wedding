@@ -144,10 +144,10 @@ export default function DressCodeSection() {
           transition={{ delay: 1, duration: 0.8 }}
         >
           <p className="font-serif text-sm text-[#8b7d6b]">
-            <span className="text-[#6b5b4e] font-medium">Ladies:</span> Elegant summer dresses in pastel tones.
+            <span className="text-[#6b5b4e] font-medium">Ladies:</span> Elegant summer dresses: saree/kurta.
           </p>
           <p className="font-serif text-sm text-[#8b7d6b]">
-            <span className="text-[#6b5b4e] font-medium">Gentlemen:</span> Suits or shirts in classic shades. Grey, blue, brown, beige are great choices!
+            <span className="text-[#6b5b4e] font-medium">Gentlemen:</span> Shirts in classic shades and mundu!.
           </p>
         </motion.div>
       </div>

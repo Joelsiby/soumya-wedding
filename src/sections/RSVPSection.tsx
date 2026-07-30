@@ -152,7 +152,7 @@ export default function RSVPSection() {
 
                 {/* Top Image */}
                 <div className="w-full h-48 sm:h-64 shrink-0 relative">
-                  <img src="/couple_placeholder.png" alt="Couple" className="w-full h-full object-cover" />
+                  <img src="/couple_img_2.jpeg" alt="Couple" className="w-full h-full object-cover" style={{ objectPosition: '50% 25%' }} />
                 </div>
 
                 {/* Scrollable Form Area */}
