@@ -2,7 +2,30 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { CalendarPlus } from 'lucide-react';
 
+const EVENT_TITLE = "Agin & Aarati's Wedding";
+const EVENT_LOCATION = 'Alfa Horizon Business Centre, Goshree Rd, opposite ICTT, Vallarpadam, Kochi, Ernakulam, Kerala 682504';
+const EVENT_DESCRIPTION = "Join us as we celebrate Agin & Aarati's wedding!";
+const EVENT_START = '20261031T043000Z';
+const EVENT_END = '20261031T190000Z';
+
 function addWeddingToCalendar() {
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+
+  if (isAndroid) {
+    // Android's Calendar app doesn't reliably pick up .ics downloads, but every
+    // Android device with Google Calendar installed handles this URL directly.
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: EVENT_TITLE,
+      dates: `${EVENT_START}/${EVENT_END}`,
+      details: EVENT_DESCRIPTION,
+      location: EVENT_LOCATION,
+    });
+    window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank');
+    return;
+  }
+
   const ics = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -11,17 +34,16 @@ function addWeddingToCalendar() {
     'BEGIN:VEVENT',
     'UID:agin-aarati-wedding-2026@invite',
     `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
-    'DTSTART:20261030T043000Z',
-    'DTEND:20261030T190000Z',
-    "SUMMARY:Agin & Aarati's Wedding",
-    'LOCATION:KRISHNA INN\\, GURUVAYOOR (Star Hotel)\\, East Nada\\, Guruvayur\\, Kerala 680101',
-    "DESCRIPTION:Join us as we celebrate Agin & Aarati's wedding!",
+    `DTSTART:${EVENT_START}`,
+    `DTEND:${EVENT_END}`,
+    `SUMMARY:${EVENT_TITLE}`,
+    `LOCATION:${EVENT_LOCATION.replace(/,/g, '\\,')}`,
+    `DESCRIPTION:${EVENT_DESCRIPTION}`,
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
 
   const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
   if (isIOS) {
     // iOS Safari blocks JS-driven navigation to data: URIs unless it's a base64
@@ -40,7 +62,7 @@ function addWeddingToCalendar() {
     return;
   }
 
-  // Android/desktop: browsers hand .ics blobs to the Calendar app via the download/open-with sheet.
+  // Desktop: browsers hand .ics blobs to the default calendar app via the download/open-with sheet.
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -92,7 +114,7 @@ export default function DateSection() {
     >
       {/* Full scale image */}
       <img
-        src="/save_the_date.png"
+        src="/reception_date.png"
         alt="Date"
         className="absolute inset-0 w-full h-full object-fill"
       />
@@ -105,7 +127,7 @@ export default function DateSection() {
       */}
       <div
         className="absolute left-0 right-0 flex flex-col items-center justify-center"
-        style={{ top: '22%', bottom: '32%', paddingLeft: '4%', paddingRight: '12%', gap: '2vw' }}
+        style={{ top: '22%', bottom: '32%', paddingLeft: '8%', paddingRight: '8%', gap: '2vw' }}
       >
         {/* Title */}
         <motion.p
@@ -118,21 +140,9 @@ export default function DateSection() {
           Save The Date
         </motion.p>
 
-        <motion.div
-          className="flex items-center text-[#9b7a4a] font-serif tracking-wider"
-          style={{ gap: '1.2vw', fontSize: '3.2vw' }}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        >
-          <span className="text-[#c9a84c]">&#10022;</span>
-          <span>Mark the date</span>
-          <span className="text-[#c9a84c]">&#10022;</span>
-        </motion.div>
-
         {/* Date cards */}
-        <div className="flex" style={{ gap: '2.5vw', marginTop: '4vw' }}>
-          <DateCard value="30" label="Day" delay={0.2} />
+        <div className="flex w-full justify-center" style={{ gap: '2.5vw', marginTop: '4vw' }}>
+          <DateCard value="31" label="Day" delay={0.2} />
           <DateCard value="Oct" label="Month" delay={0.4} />
           <DateCard value="2026" label="Year" delay={0.6} />
         </div>
