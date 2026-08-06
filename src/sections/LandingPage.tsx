@@ -59,19 +59,22 @@ export default function LandingPage() {
   return (
     <div ref={containerRef} className="relative w-full bg-[#faf7f2] overflow-x-clip">
       <HeroSection />
-      <div className="animate-section">
+      <div className="relative z-20 flex justify-center -mt-10 sm:-mt-14 -mb-10 sm:-mb-14 pointer-events-none">
+        <img src="/extra_img_2.png" alt="" className="w-screen max-w-none h-auto" />
+      </div>
+      <div className="animate-section relative z-10">
         <DateSection />
       </div>
       <div className="animate-section">
         <LetterSection />
       </div>
-      {/* <div className="animate-section">
-        <ScheduleSection />
-      </div> */}
-      <div className="animate-section">
+      <div className="relative z-20 flex justify-center -mt-10 sm:-mt-14 pointer-events-none">
+        <img src="/extra_img_2.png" alt="" className="w-screen max-w-none h-auto" />
+      </div>
+      <div className="animate-section relative z-20 -mb-20 sm:-mb-28">
         <VenueSection />
       </div>
-      <div className="animate-section">
+      <div className="animate-section relative z-10">
         <DressCodeSection />
       </div>
       <div className="animate-section">
