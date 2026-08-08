@@ -24,14 +24,16 @@ function addWeddingToCalendar() {
   const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
   if (isIOS) {
-    // iOS Safari blocks JS-driven navigation to data: URIs unless it's a base64
-    // data URI applied directly to an <a> tag's click — this is the pattern real
-    // "add to calendar" libraries use to open the native Calendar preview.
+    // iOS Safari opens the native "Add Event" Calendar preview for a text/calendar
+    // data: URI, but only via a plain <a> navigation — no `download` attribute
+    // (that forces a generic file-save instead) and no `location.href =` assignment
+    // (Safari blocks JS-driven data: URI navigation as an anti-phishing measure).
     const reader = new FileReader();
     reader.onload = () => {
       const link = document.createElement('a');
       link.href = reader.result as string;
-      link.setAttribute('download', 'Agin-Aarati-Wedding.ics');
+      link.target = '_blank';
+      link.rel = 'noopener';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
