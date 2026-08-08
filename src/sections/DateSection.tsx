@@ -1,57 +1,5 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { CalendarPlus } from 'lucide-react';
-
-function addWeddingToCalendar() {
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Agin & Aarati Wedding//EN',
-    'CALSCALE:GREGORIAN',
-    'BEGIN:VEVENT',
-    'UID:agin-aarati-wedding-2026@invite',
-    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
-    'DTSTART:20261030T043000Z',
-    'DTEND:20261030T190000Z',
-    "SUMMARY:Agin & Aarati's Wedding",
-    'LOCATION:KRISHNA INN\\, GURUVAYOOR (Star Hotel)\\, East Nada\\, Guruvayur\\, Kerala 680101',
-    "DESCRIPTION:Join us as we celebrate Agin & Aarati's wedding!",
-    'END:VEVENT',
-    'END:VCALENDAR',
-  ].join('\r\n');
-
-  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-
-  if (isIOS) {
-    // iOS Safari opens the native "Add Event" Calendar preview for a text/calendar
-    // data: URI, but only via a plain <a> navigation — no `download` attribute
-    // (that forces a generic file-save instead) and no `location.href =` assignment
-    // (Safari blocks JS-driven data: URI navigation as an anti-phishing measure).
-    const reader = new FileReader();
-    reader.onload = () => {
-      const link = document.createElement('a');
-      link.href = reader.result as string;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-    reader.readAsDataURL(blob);
-    return;
-  }
-
-  // Android/desktop: browsers hand .ics blobs to the Calendar app via the download/open-with sheet.
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'Agin-Aarati-Wedding.ics';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-}
 
 interface DateCardProps {
   value: string;
@@ -154,23 +102,6 @@ export default function DateSection() {
             </motion.span>
           ))}
         </div>
-
-        {/* Add to calendar */}
-        <motion.button
-          onClick={addWeddingToCalendar}
-          className="flex items-center text-[#7a5c3a] font-serif tracking-wider border border-[#c9a84c]/50 rounded-full cursor-pointer hover:bg-[#c9a84c]/10 transition-colors"
-          style={{ gap: '1.5vw', fontSize: '2.8vw', marginTop: '4vw', marginLeft: '30vw', padding: '2vw 4vw' }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: [10, 0, 0, -8, 0] } : {}}
-          transition={{
-            opacity: { delay: 1.1, duration: 0.4 },
-            y: { delay: 1.1, duration: 2, times: [0, 0.2, 0.5, 0.75, 1], repeat: Infinity, repeatDelay: 0.6 },
-          }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <CalendarPlus style={{ width: '3.5vw', height: '3.5vw' }} />
-          <span>Add to Calendar</span>
-        </motion.button>
       </div>
     </section>
   );
