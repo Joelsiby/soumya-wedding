@@ -99,7 +99,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={heroRef}
-      className="relative w-full h-[100vh] overflow-hidden bg-[#faf7f2]"
+      className="relative w-full h-[100dvh] overflow-hidden bg-[#faf7f2]"
     >
 
       {/* Hero Image */}
