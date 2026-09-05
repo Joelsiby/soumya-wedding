@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from './HeroSection';
 import DateSection from './DateSection';
 import LetterSection from './LetterSection';
+import ScheduleSection from './ScheduleSection';
 import VenueSection from './VenueSection';
 import DressCodeSection from './DressCodeSection';
 import RSVPSection from './RSVPSection';
@@ -59,17 +60,22 @@ export default function LandingPage() {
   return (
     <div ref={containerRef} className="relative w-full bg-[#faf7f2] overflow-x-clip">
       <HeroSection />
+      <img
+        src="/welcome-flowers.jpg"
+        alt=""
+        className="relative w-full h-auto -mt-16 sm:-mt-24"
+      />
       <div className="animate-section">
         <DateSection />
       </div>
       <div className="animate-section">
         <LetterSection />
       </div>
-      {/* <div className="animate-section">
-        <ScheduleSection />
-      </div> */}
       <div className="animate-section">
         <VenueSection />
+      </div>
+      <div className="animate-section">
+        <ScheduleSection />
       </div>
       <div className="animate-section">
         <DressCodeSection />

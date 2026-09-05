@@ -108,7 +108,7 @@ export default function HeroSection() {
         style={{ y: 0 }}
       >
         <img 
-          src="/Hero_image.png" 
+          src="/Hero_image_2.JPG"
           alt="Hero"
           className="w-full h-full object-fill"
         />
@@ -155,49 +155,6 @@ export default function HeroSection() {
             }}
           />
         ))}
-      </div>
-
-      {/* Hero text content */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-[100vh] px-6 pb-[15vh]">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center"
-        >
-          <motion.p 
-            className="font-script text-5xl sm:text-7xl text-[#5a4a3d] mb-2 drop-shadow-sm"
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            Agin & Aarati
-          </motion.p>
-          
-          <motion.p 
-            className="font-serif text-lg sm:text-xl text-[#7a6a5d] tracking-[0.2em] uppercase"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-          >
-            are getting married
-          </motion.p>
-
-          {/* Decorative line */}
-          <motion.div 
-            className="mt-6 flex items-center justify-center gap-3"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-          >
-            <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#d4af37]" />
-            <motion.div 
-              className="w-2 h-2 border border-[#d4af37] rotate-45"
-              animate={{ rotate: [45, 225, 45] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            />
-            <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#d4af37]" />
-          </motion.div>
-        </motion.div>
       </div>
 
       {/* Scroll indicator */}

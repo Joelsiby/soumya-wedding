@@ -58,7 +58,7 @@ export default function LetterSection() {
       </motion.div>
 
       {/* Sticky Envelope Container - Pins the entire screen when scrolled into view */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-between pt-[5vh] pb-[0vh] z-10">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-[5vh] pb-[0vh] z-10">
         {/* You're invited text */}
         <motion.p
           className="font-script text-6xl sm:text-7xl text-[#6b5b4e] z-20"
@@ -70,7 +70,7 @@ export default function LetterSection() {
           You're invited!
         </motion.p>
 
-        <div className="relative z-10 flex flex-col items-center w-full flex-shrink-0">
+        <div className="relative z-10 flex flex-col items-center w-full flex-shrink-0 mt-40 sm:mt-56">
           {/* Envelope Container - Bottom Clipped */}
           <div
           ref={containerRef}
@@ -137,6 +137,13 @@ export default function LetterSection() {
             />
           </div>
         </div>
+
+        {/* Divider flowers, beneath the envelope */}
+        <img
+          src="/divider_flowers.jpg"
+          alt=""
+          className="relative z-30 w-full max-w-md h-auto pointer-events-none select-none -mt-40"
+        />
 
         {/* Scroll Hint */}
         <motion.div

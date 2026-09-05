@@ -17,27 +17,28 @@ export default function VenueSection() {
   const mapsUrl = getMapsUrl(VENUE_ADDRESS);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-[80vh] sm:h-[90vh]" style={{ clipPath: 'inset(-30% 0 0 0)' }}>
-      {/* Background image, scaled up so the top leaf overlaps the section above; left/right/bottom stay flush */}
-      <img
-        src="/venue.png"
-        alt="Wedding venue"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ transform: 'scale(1.18) translateX(5%) translateY(-4%)' }}
-      />
+    <section ref={sectionRef} className="relative w-full">
+      {/* Title, above the image */}
+      <motion.p
+        className="font-script text-4xl sm:text-6xl text-[#6b5b4e] text-center pt-16 pb-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8 }}
+      >
+        Wedding Venue
+      </motion.p>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-start h-full pt-24 sm:pt-32 px-6 translate-x-8 sm:translate-x-12">
-        {/* Title */}
-        <motion.p
-          className="font-script text-4xl sm:text-6xl text-[#D4AF37] drop-shadow-lg mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          Wedding Venue
-        </motion.p>
+      {/* Background image */}
+      <div className="relative w-full h-[55vh] sm:h-[70vh] overflow-hidden">
+        <img
+          src="/venue_image_3.png"
+          alt="Wedding venue"
+          className="absolute inset-0 w-full h-full object-cover object-top"
+        />
+      </div>
 
+      {/* Content, below the image */}
+      <div className="relative z-10 flex flex-col items-center px-6 py-10">
         {/* Venue Info */}
         <motion.a
           href={mapsUrl}
@@ -48,12 +49,12 @@ export default function VenueSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-            <MapPin className="w-5 h-5 text-[#D4AF37]" />
+          <div className="w-10 h-10 rounded-full bg-[#6b5b4e]/10 flex items-center justify-center">
+            <MapPin className="w-5 h-5 text-[#6b5b4e]" />
           </div>
           <div>
-            <p className="font-display text-lg text-[#D4AF37] drop-shadow">{VENUE_NAME}</p>
-            <p className="font-serif text-sm text-[#D4AF37]/80">Guruvayoor, Kerala</p>
+            <p className="font-display text-lg text-[#6b5b4e]">{VENUE_NAME}</p>
+            <p className="font-serif text-sm text-[#7a6a5d]">Guruvayoor, Kerala</p>
           </div>
         </motion.a>
 
@@ -70,8 +71,8 @@ export default function VenueSection() {
             y: { delay: 0.5, duration: 2, times: [0, 0.2, 0.5, 0.75, 1], repeat: Infinity, repeatDelay: 0.6 },
           }}
         >
-          <MapPin className="w-5 h-5 text-[#D4AF37]" />
-          <span className="font-serif text-base sm:text-lg text-[#D4AF37]">View on Maps</span>
+          <MapPin className="w-5 h-5 text-[#6b5b4e]" />
+          <span className="font-serif text-base sm:text-lg text-[#6b5b4e]">View on Maps</span>
         </motion.a>
       </div>
     </section>
