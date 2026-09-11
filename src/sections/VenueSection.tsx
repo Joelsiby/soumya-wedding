@@ -49,7 +49,7 @@ export default function VenueSection() {
             </div>
             <div>
               <p className="font-display text-lg text-[#6b5b4e]">{VENUE_NAME}</p>
-              <p className="font-serif text-sm text-[#7a6a5d]">Indore Road, Khandwa</p>
+              <p className="font-serif text-sm text-[#7a6a5d]">Indore Road, Khandwa, M.P.</p>
             </div>
           </motion.a>
 
