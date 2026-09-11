@@ -43,7 +43,7 @@ export default function MusicButton() {
       <motion.button
         onClick={toggle}
         aria-label={isPlaying ? 'Pause music' : 'Play music'}
-        className="fixed bottom-6 right-6 z-[90] w-14 h-14 rounded-full flex items-center justify-center text-[#5a4a3d] overflow-hidden"
+        className="w-11 h-11 rounded-full flex items-center justify-center text-[#5a4a3d] overflow-hidden flex-shrink-0"
         style={{
           background: 'linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 100%)',
           backdropFilter: 'blur(16px) saturate(180%)',
@@ -67,9 +67,9 @@ export default function MusicButton() {
 
         <span className="relative z-10">
           {isPlaying ? (
-            <Pause className="w-6 h-6" fill="currentColor" />
+            <Pause className="w-4 h-4" fill="currentColor" />
           ) : (
-            <Play className="w-6 h-6 translate-x-0.5" fill="currentColor" />
+            <Play className="w-4 h-4 translate-x-0.5" fill="currentColor" />
           )}
         </span>
       </motion.button>

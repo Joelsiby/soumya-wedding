@@ -78,12 +78,7 @@ const events: EventItem[] = [
     venue: SISODIYA,
     details: 'Joyous bridal procession where the groom arrives accompanied by music and dancing family members.',
   },
-  {
-    title: 'Lagan',
-    dateTime: 'Thursday, 26 Nov 2026  |  Godhuli Bela',
-    venue: SISODIYA,
-    details: 'The core Vedic wedding rituals—including Kanyadaan, Agni Havan, and Saptapadi (Seven Vows)—performed at sunset.',
-  },
+
   {
     title: 'Reception',
     dateTime: 'Thursday, 26 Nov 2026  |  7:30 PM',
@@ -151,9 +146,11 @@ export default function ScheduleOfEventsSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 + index * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="font-serif font-bold text-sm sm:text-base tracking-[0.15em] uppercase text-[#8a6a1f]">
-                  {event.title}
-                </p>
+                {event.title && (
+                  <p className="font-serif font-bold text-sm sm:text-base tracking-[0.15em] uppercase text-[#8a6a1f]">
+                    {event.title}
+                  </p>
+                )}
                 <p className="font-serif text-sm sm:text-base text-[#4a3f36] mt-2">
                   {event.dateTime}
                 </p>

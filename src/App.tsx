@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import EnvelopeOpening from './sections/EnvelopeOpening';
 import LandingPage from './sections/LandingPage';
 import MusicButton from './components/MusicButton';
+import VenueMapButtons from './components/VenueMapButtons';
 
 export default function App() {
   const [showEnvelope, setShowEnvelope] = useState(true);
@@ -23,7 +24,10 @@ export default function App() {
 
       {/* Landing page is always rendered underneath */}
       <LandingPage />
-      <MusicButton />
+      <div className="fixed bottom-6 right-6 z-[90] flex items-center gap-2">
+        <VenueMapButtons />
+        <MusicButton />
+      </div>
 
       {/* Envelope acts as a z-index overlay and unmounts when complete */}
       <AnimatePresence>

@@ -62,15 +62,18 @@ export default function HeroSection() {
       className="relative w-full h-[100dvh] overflow-hidden bg-[#faf7f2]"
     >
 
-      {/* Hero Image */}
-      <motion.div 
+      {/* Hero Video */}
+      <motion.div
         className="absolute inset-0"
         style={{ y: 0 }}
       >
-        <img 
-          src="/Hero_image_4.png"
-          alt="Hero"
-          className="w-full h-full object-fill"
+        <video
+          src="/Hero_video.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
         />
       </motion.div>
 
@@ -108,16 +111,6 @@ export default function HeroSection() {
           />
         ))}
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <span className="text-[#8b7d6b] text-xs tracking-widest uppercase font-serif">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-[#d4af37] to-transparent" />
-      </motion.div>
     </section>
   );
 }

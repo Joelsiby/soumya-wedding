@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { motion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from './HeroSection';
 import DateSection from './DateSection';
@@ -58,12 +59,31 @@ export default function LandingPage() {
 
   return (
     <div ref={containerRef} className="relative w-full bg-[#faf7f2] overflow-x-clip">
-      <HeroSection />
-      <img
-        src="/welcome-flowers.jpg"
-        alt=""
-        className="relative w-full h-auto -mt-16 sm:-mt-24"
-      />
+      <div className="relative">
+        <HeroSection />
+        <img
+          src="/welcome-flowers.jpg"
+          alt=""
+          className="relative w-full h-auto -mt-16 sm:-mt-24"
+        />
+
+        {/* Scroll indicator: rendered after the flowers so it paints on top of both the
+            hero and the flowers, anchored to the hero's own bottom edge (100dvh) rather
+            than this wrapper's (taller) bottom edge. */}
+        <div
+          className="absolute left-[42%] -translate-x-1/2 z-40"
+          style={{ top: 'calc(100dvh - 2rem)' }}
+        >
+          <motion.div
+            className="flex flex-col items-center gap-2"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <span className="text-[#8b7d6b] text-xs tracking-widest uppercase font-serif">Scroll</span>
+            <div className="w-px h-8 bg-gradient-to-b from-[#d4af37] to-transparent" />
+          </motion.div>
+        </div>
+      </div>
       <div className="animate-section">
         <DateSection />
       </div>
