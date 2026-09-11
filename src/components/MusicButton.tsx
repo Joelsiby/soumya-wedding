@@ -86,7 +86,7 @@ export default function MusicButton() {
           {isPlaying ? (
             <Pause className="w-4 h-4" fill="currentColor" />
           ) : (
-            <PlayIcon className="w-4 h-4" />
+            <PlayIcon className="w-6 h-6" />
           )}
         </span>
       </motion.button>
