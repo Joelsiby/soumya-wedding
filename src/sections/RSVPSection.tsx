@@ -12,10 +12,10 @@ export default function RSVPSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [showSavedToast, setShowSavedToast] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    attendance: '',
-    food: ''
+    attendance: ''
   });
 
   const handleRSVPClick = () => {
@@ -47,8 +47,10 @@ export default function RSVPSection() {
 
       setIsModalOpen(false);
       setIsSubmitted(true);
-      setFormData({ name: '', attendance: '', food: '' });
+      setShowSavedToast(true);
+      setFormData({ name: '', attendance: '' });
       setTimeout(() => setIsSubmitted(false), 3000);
+      setTimeout(() => setShowSavedToast(false), 3500);
     } catch {
       setSubmitError(true);
     } finally {
@@ -183,7 +185,7 @@ export default function RSVPSection() {
                     <div className="flex flex-col gap-3">
                       <label className="font-serif text-[#000]">Will you come?</label>
                       <div className="flex flex-col gap-2">
-                        {['Yes, I will', 'Unfortunately, I cant :(', 'Ill tell you a bit later'].map((option) => (
+                        {['Yes, I will', 'Unfortunately, I cant :('].map((option) => (
                           <label key={option} className="flex items-center gap-3 cursor-pointer group">
                             <div className={`w-5 h-5 border flex items-center justify-center transition-colors ${formData.attendance === option ? 'border-[#a8c0d8] bg-[#a8c0d8]' : 'border-[#ccc] group-hover:border-[#a8c0d8]'}`}>
                               {formData.attendance === option && <Check className="w-4 h-4 text-white" strokeWidth={3} />}
@@ -202,17 +204,6 @@ export default function RSVPSection() {
                           </label>
                         ))}
                       </div>
-                    </div>
-
-                    {/* Food */}
-                    <div className="flex flex-col gap-2">
-                      <label className="font-serif text-[#000]">Do have have any food intolerances?</label>
-                      <input
-                        type="text"
-                        className="border border-[#ccc] rounded-md px-3 py-2 outline-none focus:border-[#a8c0d8] font-serif transition-colors"
-                        value={formData.food}
-                        onChange={(e) => setFormData({...formData, food: e.target.value})}
-                      />
                     </div>
 
                     {/* Submit Button */}
@@ -236,6 +227,33 @@ export default function RSVPSection() {
                 </div>
               </motion.div>
             </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      {/* "Saved" toast */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {showSavedToast && (
+            <motion.div
+              className="fixed top-6 left-1/2 -translate-x-1/2 z-[10000] px-6 py-3 rounded-full font-serif text-sm text-[#6b5b4e] shadow-lg"
+              style={{
+                background: 'rgba(255,255,255,0.9)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: '1px solid rgba(212,175,55,0.4)',
+              }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+            >
+              <span className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#d4af37]" />
+                Your response has been saved!
+              </span>
+            </motion.div>
           )}
         </AnimatePresence>,
         document.body
