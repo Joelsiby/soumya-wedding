@@ -16,8 +16,9 @@ export default function FooterSection() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
           <img
-            src="/footer.png"
+            src="/footer_image.png"
             className="w-full h-auto object-contain object-top"
+            style={{ transform: 'scale(1.15) translateX(-6%)', transformOrigin: 'top center' }}
           />
           
           {/* Bottom text overlay */}

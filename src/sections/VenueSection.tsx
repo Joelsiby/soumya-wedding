@@ -2,19 +2,13 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 
-const VENUE_NAME = 'Krishna Inn Hotel';
-const VENUE_ADDRESS = 'KRISHNA INN, GURUVAYOOR (Star Hotel), East Nada, Guruvayur, Kerala 680101';
-
-function getMapsUrl(address: string) {
-  const query = encodeURIComponent(address);
-  const isApple = typeof navigator !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent);
-  return isApple ? `https://maps.apple.com/?q=${query}` : `https://maps.google.com/?q=${query}`;
-}
+const VENUE_NAME = 'Sisodiya Resort';
+const MAPS_URL = 'https://maps.app.goo.gl/9xE6ZcoJAzBbAwS2A';
 
 export default function VenueSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  const mapsUrl = getMapsUrl(VENUE_ADDRESS);
+  const mapsUrl = MAPS_URL;
 
   return (
     <section ref={sectionRef} className="relative w-full">
@@ -54,7 +48,7 @@ export default function VenueSection() {
           </div>
           <div>
             <p className="font-display text-lg text-[#6b5b4e]">{VENUE_NAME}</p>
-            <p className="font-serif text-sm text-[#7a6a5d]">Guruvayoor, Kerala</p>
+            <p className="font-serif text-sm text-[#7a6a5d]">Indore Road, Khandwa</p>
           </div>
         </motion.a>
 

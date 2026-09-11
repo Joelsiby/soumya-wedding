@@ -43,18 +43,35 @@ export default function MusicButton() {
       <motion.button
         onClick={toggle}
         aria-label={isPlaying ? 'Pause music' : 'Play music'}
-        className="fixed bottom-6 right-6 z-[90] w-14 h-14 rounded-full flex items-center justify-center bg-[#6b5b4e] text-[#faf7f2] shadow-lg"
-        style={{ boxShadow: '0 6px 20px rgba(0,0,0,0.25)' }}
+        className="fixed bottom-6 right-6 z-[90] w-14 h-14 rounded-full flex items-center justify-center text-[#5a4a3d] overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 100%)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+          border: '1px solid rgba(255,255,255,0.6)',
+          boxShadow:
+            '0 8px 24px rgba(0,0,0,0.18), inset 0 1px 1px rgba(255,255,255,0.8), inset 0 -6px 10px rgba(255,255,255,0.15)',
+        }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 1 }}
         whileTap={{ scale: 0.9 }}
       >
-        {isPlaying ? (
-          <Pause className="w-6 h-6" fill="currentColor" />
-        ) : (
-          <Play className="w-6 h-6 translate-x-0.5" fill="currentColor" />
-        )}
+        {/* Glossy top highlight, like liquid glass catching light */}
+        <span
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle at 32% 22%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 55%)',
+          }}
+        />
+
+        <span className="relative z-10">
+          {isPlaying ? (
+            <Pause className="w-6 h-6" fill="currentColor" />
+          ) : (
+            <Play className="w-6 h-6 translate-x-0.5" fill="currentColor" />
+          )}
+        </span>
       </motion.button>
     </>
   );

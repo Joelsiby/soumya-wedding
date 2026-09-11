@@ -53,46 +53,6 @@ function Bird({ delay, duration, startY, reverse = false, scale = 1 }: BirdProps
   );
 }
 
-interface CloudProps {
-  top: string;
-  delay: number;
-  duration: number;
-  scale: number;
-  opacity: number;
-}
-
-function Cloud({ top, delay, duration, scale, opacity }: CloudProps) {
-  return (
-    <motion.div
-      className="absolute pointer-events-none"
-      style={{ 
-        top,
-        left: '-30%',
-        width: '300px',
-        height: '120px',
-        opacity,
-      }}
-      animate={{ 
-        x: ['0vw', '130vw'],
-        y: [0, -15, 10, -5, 0],
-      }}
-      transition={{ 
-        x: { duration, delay, repeat: Infinity, ease: 'linear' },
-        y: { duration: 8, delay, repeat: Infinity, ease: 'easeInOut' }
-      }}
-    >
-      <div 
-        className="w-full h-full rounded-full"
-        style={{
-          background: `radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0) 70%)`,
-          filter: 'blur(20px)',
-          transform: `scale(${scale})`,
-        }}
-      />
-    </motion.div>
-  );
-}
-
 export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -108,7 +68,7 @@ export default function HeroSection() {
         style={{ y: 0 }}
       >
         <img 
-          src="/Hero_image_2.JPG"
+          src="/Hero_image_4.png"
           alt="Hero"
           className="w-full h-full object-fill"
         />
@@ -122,14 +82,6 @@ export default function HeroSection() {
         <Bird delay={3} duration={25} startY={35} reverse scale={0.4} />
         <Bird delay={15} duration={19} startY={20} />
         <Bird delay={8} duration={24} startY={30} reverse scale={0.5} />
-      </div>
-
-      {/* Animated clouds */}
-      <div className="absolute inset-0 pointer-events-none z-[5] overflow-hidden">
-        <Cloud top="5%" delay={0} duration={35} scale={1.2} opacity={0.6} />
-        <Cloud top="15%" delay={8} duration={40} scale={0.8} opacity={0.4} />
-        <Cloud top="8%" delay={16} duration={45} scale={1.0} opacity={0.5} />
-        <Cloud top="20%" delay={24} duration={38} scale={0.6} opacity={0.3} />
       </div>
 
       {/* Floating decorative elements - small sparkles */}

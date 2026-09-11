@@ -26,7 +26,7 @@ export default function RSVPSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full pt-10 pb-16 sm:pt-14 sm:pb-24 bg-[#faf7f2]">
+    <section ref={sectionRef} className="relative w-full pt-10 sm:pt-14 bg-[#faf7f2]">
       {/* Decorative flower, connected to the top-right border */}
       <motion.img
         src="/flower1.png"
@@ -119,7 +119,7 @@ export default function RSVPSection() {
           transition={{ delay: 0.8, duration: 0.8 }}
         >
           <p className="font-script text-2xl text-[#8b7d6b] mb-2">Hope to see you there!</p>
-          <p className="font-display text-xl text-[#6b5b4e]">Agin & Aarati</p>
+          <p className="font-display text-xl text-[#6b5b4e]">Soumya &amp; Sanskriti</p>
           
           <motion.div
             className="mt-4"

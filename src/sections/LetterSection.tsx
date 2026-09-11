@@ -58,7 +58,7 @@ export default function LetterSection() {
       </motion.div>
 
       {/* Sticky Envelope Container - Pins the entire screen when scrolled into view */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-[5vh] pb-[0vh] z-10">
+      <div className="sticky top-0 h-dvh w-full flex flex-col items-center justify-start pt-[5vh] pb-[0vh] z-10">
         {/* You're invited text */}
         <motion.p
           className="font-script text-6xl sm:text-7xl text-[#6b5b4e] z-20"
@@ -138,11 +138,11 @@ export default function LetterSection() {
           </div>
         </div>
 
-        {/* Divider flowers, beneath the envelope */}
+        {/* Divider flowers, pinned above everything, out of flow so it can never push layout around */}
         <img
           src="/divider_flowers.jpg"
           alt=""
-          className="relative z-30 w-full max-w-md h-auto pointer-events-none select-none -mt-40"
+          className="absolute z-40 -bottom-48 sm:-bottom-40 left-1/2 -translate-x-1/2 w-full max-w-md h-auto pointer-events-none select-none"
         />
 
         {/* Scroll Hint */}
