@@ -58,7 +58,7 @@ export default function LetterSection() {
       </motion.div>
 
       {/* Sticky Envelope Container - Pins the entire screen when scrolled into view */}
-      <div className="sticky top-0 h-dvh w-full flex flex-col items-center justify-start pt-[5vh] pb-[0vh] z-10">
+      <div className="sticky top-0 h-svh w-full flex flex-col items-center justify-start pt-[5vh] pb-[0vh] z-10">
         {/* You're invited text */}
         <motion.p
           className="font-script text-6xl sm:text-7xl text-[#6b5b4e] z-20"

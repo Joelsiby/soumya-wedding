@@ -68,11 +68,11 @@ export default function LandingPage() {
         />
 
         {/* Scroll indicator: rendered after the flowers so it paints on top of both the
-            hero and the flowers, anchored to the hero's own bottom edge (100dvh) rather
+            hero and the flowers, anchored to the hero's own bottom edge (100svh) rather
             than this wrapper's (taller) bottom edge. */}
         <div
           className="absolute left-[42%] -translate-x-1/2 z-40"
-          style={{ top: 'calc(100dvh - 2rem)' }}
+          style={{ top: 'calc(100svh - 2rem)' }}
         >
           <motion.div
             className="flex flex-col items-center gap-2"
