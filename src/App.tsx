@@ -24,7 +24,7 @@ export default function App() {
 
       {/* Landing page is always rendered underneath */}
       <LandingPage />
-      <div className="fixed bottom-6 right-6 z-[90] flex items-center gap-2">
+      <div className="fixed bottom-6 right-6 z-[110] flex items-center gap-2">
         <VenueMapButtons />
         <MusicButton />
       </div>
