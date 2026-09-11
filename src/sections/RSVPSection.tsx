@@ -3,11 +3,15 @@ import { createPortal } from 'react-dom';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 
+const RSVP_ENDPOINT = import.meta.env.VITE_RSVP_ENDPOINT as string | undefined;
+
 export default function RSVPSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     attendance: '',
@@ -18,11 +22,38 @@ export default function RSVPSection() {
     setIsModalOpen(true);
   };
 
-  const handleModalSubmit = (e: React.FormEvent) => {
+  const handleModalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsModalOpen(false);
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+
+    if (!RSVP_ENDPOINT) {
+      console.error('VITE_RSVP_ENDPOINT is not set — RSVP cannot be saved.');
+      setSubmitError(true);
+      return;
+    }
+
+    setSubmitError(false);
+    setIsSubmitting(true);
+
+    try {
+      // Apps Script web apps don't handle CORS preflight requests, so the body
+      // is sent as text/plain (a "simple request" that skips preflight) and
+      // JSON-parsed on the server side inside doPost.
+      await fetch(RSVP_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(formData),
+      });
+
+      setIsModalOpen(false);
+      setIsSubmitted(true);
+      setFormData({ name: '', attendance: '', food: '' });
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -128,11 +159,6 @@ export default function RSVPSection() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
 
-                {/* Top Image */}
-                <div className="w-full h-48 sm:h-64 shrink-0 relative">
-                  <img src="/couple_img_2.jpeg" alt="Couple" className="w-full h-full object-cover" style={{ objectPosition: '50% 25%' }} />
-                </div>
-
                 {/* Scrollable Form Area */}
                 <div className="flex-1 overflow-y-auto p-6 sm:p-8 custom-scrollbar">
                   <div className="text-center mb-6">
@@ -192,13 +218,20 @@ export default function RSVPSection() {
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      className="mt-2 w-full relative h-12 bg-[#9bc5d6] text-white font-serif rounded-full overflow-hidden hover:bg-[#8ab8cb] transition-colors flex items-center justify-center"
+                      disabled={isSubmitting}
+                      className="mt-2 w-full relative h-12 bg-[#9bc5d6] text-white font-serif rounded-full overflow-hidden hover:bg-[#8ab8cb] transition-colors flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <span className="z-10">Submit</span>
+                      <span className="z-10">{isSubmitting ? 'Sending...' : 'Submit'}</span>
                       <div className="absolute right-0 top-0 bottom-0 aspect-square bg-[#5f9eb8] rounded-full flex items-center justify-center">
                         <svg className="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" /></svg>
                       </div>
                     </button>
+
+                    {submitError && (
+                      <p className="text-center text-red-500 text-sm font-serif -mt-2">
+                        Something went wrong sending your RSVP. Please try again.
+                      </p>
+                    )}
                   </form>
                 </div>
               </motion.div>
