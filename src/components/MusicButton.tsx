@@ -56,7 +56,7 @@ export default function MusicButton() {
 
   return (
     <>
-      <audio ref={audioRef} src="/man_mast_magan.mp3" loop />
+      <audio ref={audioRef} src="/background_song.mp3" loop />
       <motion.button
         onClick={toggle}
         aria-label={isPlaying ? 'Pause music' : 'Play music'}
