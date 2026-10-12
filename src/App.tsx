@@ -24,7 +24,14 @@ export default function App() {
 
       {/* Landing page is always rendered underneath */}
       <LandingPage envelopeOpen={showEnvelope} />
-      <div className="fixed bottom-6 right-6 z-[110] flex items-center gap-2">
+      {/* Hidden (not unmounted) while the envelope intro is showing — the
+          MusicButton's <audio> element still needs to stay mounted so the
+          envelope's logo-tap can register and start it. */}
+      <div
+        className={`fixed bottom-6 right-6 z-[110] flex items-center gap-2 transition-opacity duration-300 ${
+          showEnvelope ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+      >
         <VenueMapButtons />
         <MusicButton />
       </div>
