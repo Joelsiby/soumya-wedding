@@ -1,24 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Pause } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { registerMusicAudio } from '@/lib/musicController';
-
-// lucide's default Play triangle isn't optically centered or sized to match
-// Pause's visual weight within the same 24x24 box. This path (Heroicons'
-// solid play glyph) is both larger — closer to Pause's bar height/width —
-// and has its centroid much closer to the icon's true center (12,12).
-function PlayIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-    >
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
-}
 
 export default function MusicButton() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -84,9 +67,9 @@ export default function MusicButton() {
 
         <span className="relative z-10">
           {isPlaying ? (
-            <Pause className="w-4 h-4" fill="currentColor" />
+            <Volume2 className="w-5 h-5" />
           ) : (
-            <PlayIcon className="w-6 h-6" />
+            <VolumeX className="w-5 h-5" />
           )}
         </span>
       </motion.button>

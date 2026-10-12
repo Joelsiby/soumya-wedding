@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from './HeroSection';
 import DateSection from './DateSection';
@@ -12,8 +13,45 @@ import FooterSection from './FooterSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function LandingPage() {
+interface LandingPageProps {
+  // Whether the envelope intro overlay is still showing. The 5s "nudge"
+  // countdown below only makes sense once the visitor can actually see the
+  // hero, so it's held off entirely until this flips to false.
+  envelopeOpen?: boolean;
+}
+
+export default function LandingPage({ envelopeOpen = false }: LandingPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Still showing the envelope intro — don't start the countdown yet.
+    if (envelopeOpen) return;
+
+    // Nudge: if the visitor hasn't scrolled within 5s of the hero becoming
+    // visible, give the page a gentle "jump" — a quick scroll down and back
+    // — as a physical hint that it scrolls. Cancels itself the moment the
+    // visitor scrolls, touches, or uses their wheel on their own.
+    const nudgeTimer = setTimeout(() => {
+      if (window.scrollY > 10) return;
+
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 350);
+    }, 5000);
+
+    const cancelNudge = () => clearTimeout(nudgeTimer);
+    window.addEventListener('scroll', cancelNudge, { once: true, passive: true });
+    window.addEventListener('touchstart', cancelNudge, { once: true, passive: true });
+    window.addEventListener('wheel', cancelNudge, { once: true, passive: true });
+
+    return () => {
+      clearTimeout(nudgeTimer);
+      window.removeEventListener('scroll', cancelNudge);
+      window.removeEventListener('touchstart', cancelNudge);
+      window.removeEventListener('wheel', cancelNudge);
+    };
+  }, [envelopeOpen]);
 
   useEffect(() => {
     // Setup smooth scroll-triggered animations for all sections
@@ -71,16 +109,16 @@ export default function LandingPage() {
             hero and the flowers, anchored to the hero's own bottom edge (100svh) rather
             than this wrapper's (taller) bottom edge. */}
         <div
-          className="absolute left-[42%] -translate-x-1/2 z-40"
-          style={{ top: 'calc(100svh - 2rem)' }}
+          className="absolute left-[12%] -translate-x-1/2 z-40"
+          style={{ top: 'calc(100svh - 4rem)' }}
         >
           <motion.div
-            className="flex flex-col items-center gap-2"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center gap-1"
+            animate={{ y: [0, 14, 0] }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'easeOut' }}
           >
-            <span className="text-[#8b7d6b] text-xs tracking-widest uppercase font-serif">Scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-[#d4af37] to-transparent" />
+            <span className="text-black text-xs font-serif tracking-wide">Scroll Down</span>
+            <ChevronDown className="w-5 h-5 text-[#d4af37]" strokeWidth={2} />
           </motion.div>
         </div>
       </div>
